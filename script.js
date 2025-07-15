@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Global variables
 let pomodoroTimer = null;
 let pomodoroSeconds = 25 * 60; // 25 minutes in seconds
+let isPaused = false;
+let isRunning = false;
 
 // Initialize the application
 function initializeApp() {
@@ -62,24 +64,175 @@ function setupMobileNav() {
 
 // HOME PAGE FUNCTIONALITY
 function initHomePage() {
-    // Load today's step from localStorage
-    const todayStep = localStorage.getItem('todayStep');
-    if (todayStep) {
-        const input = document.getElementById('todayStep');
-        if (input) input.value = todayStep;
-    }
-    
-    // Set today's date as default
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('todayStep')?.setAttribute('placeholder', 'What\'s your focus for today?');
+    loadPapers();
+    loadBooksummary();
+    loadSkills();
+    loadResearchUpdates();
+    loadPomodoroStats();
+    loadSessionHistory();
 }
 
-// Save today's step to localStorage
-function saveTodayStep() {
-    const input = document.getElementById('todayStep');
-    if (input) {
-        localStorage.setItem('todayStep', input.value);
-        showNotification('Today\'s step saved successfully!');
+// PAPERS FUNCTIONALITY
+function showAddPaperForm() {
+    document.getElementById('addPaperForm').style.display = 'block';
+}
+
+function hideAddPaperForm() {
+    document.getElementById('addPaperForm').style.display = 'none';
+    document.getElementById('paperTitle').value = '';
+    document.getElementById('paperZoteroLink').value = '';
+}
+
+function addPaper() {
+    const title = document.getElementById('paperTitle').value.trim();
+    const zoteroLink = document.getElementById('paperZoteroLink').value.trim();
+    
+    if (!title) {
+        showNotification('Please enter a paper title');
+        return;
+    }
+    
+    const paper = {
+        id: Date.now(),
+        title: title,
+        zoteroLink: zoteroLink,
+        dateAdded: new Date().toISOString()
+    };
+    
+    const papers = JSON.parse(localStorage.getItem('papers')) || [];
+    papers.push(paper);
+    localStorage.setItem('papers', JSON.stringify(papers));
+    
+    loadPapers();
+    hideAddPaperForm();
+    showNotification('Paper added successfully!');
+}
+
+function loadPapers() {
+    const papers = JSON.parse(localStorage.getItem('papers')) || [];
+    const papersList = document.getElementById('papersList');
+    
+    if (!papersList) return;
+    
+    papersList.innerHTML = '';
+    
+    papers.forEach(paper => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <div class="paper-info">
+                <span class="paper-title">${paper.title}</span>
+                ${paper.zoteroLink ? `<a href="${paper.zoteroLink}" target="_blank" class="paper-link">→ Click to Zotero</a>` : ''}
+            </div>
+            <button class="action-btn delete-btn" onclick="deletePaper(${paper.id})">×</button>
+        `;
+        papersList.appendChild(li);
+    });
+}
+
+function deletePaper(id) {
+    if (confirm('Are you sure you want to delete this paper?')) {
+        const papers = JSON.parse(localStorage.getItem('papers')) || [];
+        const filteredPapers = papers.filter(paper => paper.id !== id);
+        localStorage.setItem('papers', JSON.stringify(filteredPapers));
+        loadPapers();
+        showNotification('Paper deleted successfully!');
+    }
+}
+
+// BOOKS SUMMARY FUNCTIONALITY
+function saveBooksSummary() {
+    const summary = document.getElementById('booksSummary').value;
+    localStorage.setItem('booksSummary', summary);
+    showNotification('Books summary saved successfully!');
+}
+
+function loadBooksummary() {
+    const summary = localStorage.getItem('booksSummary');
+    const textarea = document.getElementById('booksSummary');
+    if (textarea && summary) {
+        textarea.value = summary;
+    }
+}
+
+// SKILLS FUNCTIONALITY
+function showAddSkillForm() {
+    document.getElementById('addSkillForm').style.display = 'block';
+}
+
+function hideAddSkillForm() {
+    document.getElementById('addSkillForm').style.display = 'none';
+    document.getElementById('skillTitle').value = '';
+    document.getElementById('skillNotes').value = '';
+}
+
+function addSkill() {
+    const title = document.getElementById('skillTitle').value.trim();
+    const notes = document.getElementById('skillNotes').value.trim();
+    
+    if (!title) {
+        showNotification('Please enter a skill/learning topic');
+        return;
+    }
+    
+    const skill = {
+        id: Date.now(),
+        title: title,
+        notes: notes,
+        dateAdded: new Date().toISOString()
+    };
+    
+    const skills = JSON.parse(localStorage.getItem('skills')) || [];
+    skills.push(skill);
+    localStorage.setItem('skills', JSON.stringify(skills));
+    
+    loadSkills();
+    hideAddSkillForm();
+    showNotification('Learning entry added successfully!');
+}
+
+function loadSkills() {
+    const skills = JSON.parse(localStorage.getItem('skills')) || [];
+    const skillsList = document.getElementById('skillsList');
+    
+    if (!skillsList) return;
+    
+    skillsList.innerHTML = '';
+    
+    skills.forEach(skill => {
+        const div = document.createElement('div');
+        div.className = 'skill-item';
+        div.innerHTML = `
+            <h5>${skill.title}</h5>
+            <p>${skill.notes}</p>
+            <div class="skill-date">${formatDate(skill.dateAdded)}</div>
+            <button class="action-btn delete-btn" onclick="deleteSkill(${skill.id})">Delete</button>
+        `;
+        skillsList.appendChild(div);
+    });
+}
+
+function deleteSkill(id) {
+    if (confirm('Are you sure you want to delete this learning entry?')) {
+        const skills = JSON.parse(localStorage.getItem('skills')) || [];
+        const filteredSkills = skills.filter(skill => skill.id !== id);
+        localStorage.setItem('skills', JSON.stringify(filteredSkills));
+        loadSkills();
+        showNotification('Learning entry deleted successfully!');
+    }
+}
+
+// RESEARCH UPDATES FUNCTIONALITY
+function saveResearchUpdates() {
+    const updates = document.getElementById('researchUpdates').value;
+    localStorage.setItem('researchUpdates', updates);
+    showNotification('Research updates saved successfully!');
+}
+
+function loadResearchUpdates() {
+    const updates = localStorage.getItem('researchUpdates');
+    const textarea = document.getElementById('researchUpdates');
+    if (textarea && updates) {
+        textarea.value = updates;
     }
 }
 
@@ -87,53 +240,6 @@ function saveTodayStep() {
 function initResearchPage() {
     loadResearchEntries();
     setupResearchForm();
-    initializeSampleResearch();
-}
-
-// Sample research data
-const sampleResearchData = [
-    {
-        id: 1,
-        title: "Computational Methods for Multiphase Flows",
-        link: "https://example.com/multiphase-flows",
-        tags: ["Three-Phase", "VOF", "Computational"],
-        firstPrinciples: "Based on Navier-Stokes equations with volume fraction tracking. Conservation of mass and momentum at interfaces.",
-        mentalModel: "Interface as sharp boundaries with continuous properties",
-        confidence: 8,
-        connections: "Direct application to my three-phase reconstruction work. Provides foundation for ML-golden search optimization.",
-        keyEquations: "∇·u = 0 (continuity), ∂α/∂t + u·∇α = 0 (volume fraction transport)"
-    },
-    {
-        id: 2,
-        title: "Machine Learning for Interface Reconstruction",
-        link: "https://example.com/ml-interface",
-        tags: ["ML", "Interface", "Reconstruction"],
-        firstPrinciples: "Neural networks approximate complex interface geometry from volume fraction data. Supervised learning on synthetic datasets.",
-        mentalModel: "ML as pattern recognition for interface shapes",
-        confidence: 7,
-        connections: "Core to my research. ML-integrated golden search speeds up traditional VOF methods by 10-50x.",
-        keyEquations: "Loss = MSE(predicted_interface, true_interface), Golden_ratio = (1+√5)/2"
-    },
-    {
-        id: 3,
-        title: "Three-Phase Flow Dynamics",
-        link: "https://example.com/three-phase",
-        tags: ["Three-Phase", "Dynamics", "Theory"],
-        firstPrinciples: "Extension of two-phase flow with additional complexity. Three volume fractions: α₁ + α₂ + α₃ = 1",
-        mentalModel: "Three fluids competing for space like territorial animals",
-        confidence: 6,
-        connections: "My research focus. Understanding three-phase interactions critical for industrial applications.",
-        keyEquations: "∑αᵢ = 1, ∂αᵢ/∂t + ∇·(αᵢuᵢ) = 0 for i=1,2,3"
-    }
-];
-
-// Initialize sample research data
-function initializeSampleResearch() {
-    const existingData = JSON.parse(localStorage.getItem('researchEntries')) || [];
-    if (existingData.length === 0) {
-        localStorage.setItem('researchEntries', JSON.stringify(sampleResearchData));
-        loadResearchEntries();
-    }
 }
 
 // Load research entries from localStorage
@@ -284,59 +390,6 @@ function hideAddForm() {
 function initModelsPage() {
     loadMentalModels();
     setupModelsForm();
-    initializeSampleModels();
-}
-
-// Sample mental models data
-const sampleMentalModels = [
-    {
-        id: 1,
-        name: "Flow Observer",
-        description: "Multi-layer cognitive framework for analyzing complex fluid dynamics and interface behavior.",
-        layers: [
-            "Surface Flow: Spot patterns and anomalies in fluid behavior",
-            "Interface Reconstruction: Break complex interfaces to basic geometric primitives",
-            "Optimization Stream: Connect optimization techniques with physical constraints",
-            "Turbulence Alert: Flag non-linear behaviors and instabilities"
-        ],
-        researchApplication: "Apply to three-phase flow analysis. Surface layer identifies interface regions, reconstruction layer applies VOF methods, optimization layer integrates ML-golden search.",
-        example: "When analyzing simulation results, first observe overall flow patterns (Surface), then focus on interface geometry (Reconstruction), apply optimization (Stream), and check for instabilities (Alert)."
-    },
-    {
-        id: 2,
-        name: "First Principles Ladder",
-        description: "Systematic approach to breaking down complex problems into fundamental physics.",
-        layers: [
-            "Conservation Laws: Start with mass, momentum, energy conservation",
-            "Constitutive Relations: Material properties and interface conditions",
-            "Boundary Conditions: Physical constraints and domain limits",
-            "Numerical Methods: Discretization and solution algorithms"
-        ],
-        researchApplication: "For interface reconstruction: (1) Conservation of volume fractions, (2) Surface tension effects, (3) Contact angle conditions, (4) VOF discretization schemes.",
-        example: "When stuck on interface problem, climb ladder: What's conserved? → How do materials behave? → What are the boundaries? → How to solve numerically?"
-    },
-    {
-        id: 3,
-        name: "Jello Interface Model",
-        description: "Visualize fluid interfaces as flexible jello layers that can deform but maintain topology.",
-        layers: [
-            "Jello Sheet: Interface as deformable 2D surface",
-            "Flexibility: Can bend and stretch but not break",
-            "Topology Preservation: Maintains connectivity",
-            "Forces: Surface tension acts like elastic energy"
-        ],
-        researchApplication: "Helps understand interface reconstruction challenges. Jello model shows why sharp interfaces are difficult - they're like rigid sheets in flexible jello.",
-        example: "When debugging interface reconstruction, imagine jello: Is the interface too rigid? Are we allowing natural deformation? Are we preserving the jello's integrity?"
-    }
-];
-
-// Initialize sample mental models
-function initializeSampleModels() {
-    const existingData = JSON.parse(localStorage.getItem('mentalModels')) || [];
-    if (existingData.length === 0) {
-        localStorage.setItem('mentalModels', JSON.stringify(sampleMentalModels));
-        loadMentalModels();
-    }
 }
 
 // Load mental models
@@ -477,46 +530,8 @@ function hideAddModelForm() {
 function initProgressPage() {
     loadProgressEntries();
     setupProgressForm();
-    initializeSampleProgress();
     createConcentrationChart();
     loadReflectionNotes();
-}
-
-// Sample progress data
-const sampleProgressData = [
-    {
-        id: 1,
-        week: "2025-01-20",
-        quickWins: "Applied 3-Layer Read to VOF paper, debugged ML-golden search algorithm, set up simulation framework",
-        concentrationScore: 8,
-        endorphinsLog: "20-min morning walk, 15-min stretching, afternoon coffee with colleagues",
-        milestones: "Completed literature review section, achieved 30% speedup in interface reconstruction"
-    },
-    {
-        id: 2,
-        week: "2025-01-13",
-        quickWins: "Implemented Flow Observer model, fixed boundary condition bugs, wrote first principles notes",
-        concentrationScore: 7,
-        endorphinsLog: "Gym session, bike ride to campus, healthy lunch",
-        milestones: "Successfully integrated ML model with VOF solver, presented initial results to advisor"
-    },
-    {
-        id: 3,
-        week: "2025-01-06",
-        quickWins: "Set up development environment, created mental models framework, organized research papers",
-        concentrationScore: 6,
-        endorphinsLog: "Morning yoga, walk around campus, team lunch",
-        milestones: "Established research methodology, defined project scope and timeline"
-    }
-];
-
-// Initialize sample progress data
-function initializeSampleProgress() {
-    const existingData = JSON.parse(localStorage.getItem('progressEntries')) || [];
-    if (existingData.length === 0) {
-        localStorage.setItem('progressEntries', JSON.stringify(sampleProgressData));
-        loadProgressEntries();
-    }
 }
 
 // Load progress entries
@@ -701,57 +716,8 @@ function hideAddProgressForm() {
 function initConcentrationPage() {
     loadConcentrationSessions();
     setupConcentrationForm();
-    initializeSampleSessions();
     updateConcentrationStats();
     setCurrentDate();
-}
-
-// Sample concentration sessions
-const sampleConcentrationSessions = [
-    {
-        id: 1,
-        date: "2025-01-25",
-        duration: "25 min",
-        score: 8,
-        notes: "Applied Pomodoro technique. Focused on VOF algorithm implementation. Good flow state."
-    },
-    {
-        id: 2,
-        date: "2025-01-25",
-        duration: "45 min",
-        score: 7,
-        notes: "Deep work session on literature review. Some distractions from notifications."
-    },
-    {
-        id: 3,
-        date: "2025-01-24",
-        duration: "30 min",
-        score: 9,
-        notes: "Excellent focus during ML model debugging. Used noise-cancelling headphones."
-    },
-    {
-        id: 4,
-        date: "2025-01-24",
-        duration: "20 min",
-        score: 6,
-        notes: "Short session on paper writing. Interrupted by advisor meeting."
-    },
-    {
-        id: 5,
-        date: "2025-01-23",
-        duration: "90 min",
-        score: 9,
-        notes: "Amazing deep work session. Implemented interface reconstruction algorithm. Perfect environment."
-    }
-];
-
-// Initialize sample concentration sessions
-function initializeSampleSessions() {
-    const existingData = JSON.parse(localStorage.getItem('concentrationSessions')) || [];
-    if (existingData.length === 0) {
-        localStorage.setItem('concentrationSessions', JSON.stringify(sampleConcentrationSessions));
-        loadConcentrationSessions();
-    }
 }
 
 // Set current date in form
@@ -949,33 +915,166 @@ function hideAddSessionForm() {
 }
 
 // POMODORO TIMER FUNCTIONALITY
-function startTimer() {
-    const timerDisplay = document.getElementById('timerDisplay');
-    const timerText = document.getElementById('timerText');
+function startPomodoro() {
+    if (isRunning && !isPaused) return;
     
-    timerDisplay.style.display = 'flex';
+    isRunning = true;
+    isPaused = false;
+    
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const timerCircle = document.querySelector('.timer-circle');
+    
+    startBtn.disabled = true;
+    pauseBtn.disabled = false;
+    timerCircle.classList.add('active');
     
     pomodoroTimer = setInterval(() => {
         const minutes = Math.floor(pomodoroSeconds / 60);
         const seconds = pomodoroSeconds % 60;
         
-        timerText.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById('pomodoroTime').textContent = 
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         
         if (pomodoroSeconds <= 0) {
             clearInterval(pomodoroTimer);
-            showNotification('Pomodoro session complete! Take a break.');
-            pomodoroSeconds = 25 * 60; // Reset
+            completeSession();
+            return;
         }
         
         pomodoroSeconds--;
     }, 1000);
 }
 
-function stopTimer() {
+function pausePomodoro() {
+    if (!isRunning) return;
+    
     clearInterval(pomodoroTimer);
-    pomodoroSeconds = 25 * 60; // Reset
-    document.getElementById('timerDisplay').style.display = 'none';
-    document.getElementById('timerText').textContent = '25:00';
+    isPaused = true;
+    
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const timerCircle = document.querySelector('.timer-circle');
+    
+    startBtn.disabled = false;
+    pauseBtn.disabled = true;
+    timerCircle.classList.remove('active');
+    
+    startBtn.textContent = 'Resume';
+}
+
+function resetPomodoro() {
+    clearInterval(pomodoroTimer);
+    pomodoroSeconds = 25 * 60;
+    isRunning = false;
+    isPaused = false;
+    
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const timerCircle = document.querySelector('.timer-circle');
+    
+    startBtn.disabled = false;
+    pauseBtn.disabled = true;
+    startBtn.textContent = 'Start';
+    timerCircle.classList.remove('active');
+    
+    document.getElementById('pomodoroTime').textContent = '25:00';
+}
+
+function completeSession() {
+    isRunning = false;
+    isPaused = false;
+    
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const timerCircle = document.querySelector('.timer-circle');
+    
+    startBtn.disabled = false;
+    pauseBtn.disabled = true;
+    startBtn.textContent = 'Start';
+    timerCircle.classList.remove('active');
+    
+    // Play audio alert
+    playCompletionSound();
+    
+    // Save session
+    saveSession();
+    
+    // Reset timer
+    pomodoroSeconds = 25 * 60;
+    document.getElementById('pomodoroTime').textContent = '25:00';
+    
+    showNotification('Pomodoro session complete! Take a break.');
+}
+
+function playCompletionSound() {
+    // Create audio context for a simple beep
+    try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.value = 800;
+        oscillator.type = 'sine';
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.5);
+    } catch (e) {
+        console.log('Audio not supported');
+    }
+}
+
+function saveSession() {
+    const sessions = JSON.parse(localStorage.getItem('pomodoroSessions')) || [];
+    const session = {
+        id: Date.now(),
+        date: new Date().toISOString(),
+        duration: 25 * 60, // 25 minutes in seconds
+        completed: true
+    };
+    
+    sessions.push(session);
+    localStorage.setItem('pomodoroSessions', JSON.stringify(sessions));
+    
+    loadPomodoroStats();
+    loadSessionHistory();
+}
+
+function loadPomodoroStats() {
+    const sessions = JSON.parse(localStorage.getItem('pomodoroSessions')) || [];
+    const today = new Date().toISOString().split('T')[0];
+    
+    const todaySessions = sessions.filter(session => 
+        session.date.split('T')[0] === today
+    );
+    
+    document.getElementById('sessionsToday').textContent = todaySessions.length;
+    document.getElementById('totalSessions').textContent = sessions.length;
+}
+
+function loadSessionHistory() {
+    const sessions = JSON.parse(localStorage.getItem('pomodoroSessions')) || [];
+    const sessionHistory = document.getElementById('sessionHistory');
+    
+    if (!sessionHistory) return;
+    
+    sessionHistory.innerHTML = '';
+    
+    // Show last 5 sessions
+    sessions.slice(-5).reverse().forEach(session => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <div>Session completed</div>
+            <div class="session-time">${formatDateTime(session.date)}</div>
+        `;
+        sessionHistory.appendChild(li);
+    });
 }
 
 // UTILITY FUNCTIONS
@@ -985,6 +1084,16 @@ function formatDate(dateString) {
         year: 'numeric',
         month: 'short',
         day: 'numeric'
+    });
+}
+
+function formatDateTime(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
     });
 }
 

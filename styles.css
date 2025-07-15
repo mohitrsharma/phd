@@ -229,81 +229,220 @@ section {
     text-align: center;
 }
 
-/* Overview Grid */
-.overview-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.todo-section, .research-focus {
-    background-color: var(--bg-light);
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    border: 1px solid var(--border-color);
-}
-
-.todo-list {
-    list-style: none;
-}
-
-.todo-list li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.todo-list li:last-child {
-    border-bottom: none;
-}
-
-.todo-list li:before {
-    content: "✓";
-    color: var(--success-color);
-    font-weight: bold;
-    margin-right: 0.5rem;
-}
-
-.focus-equation {
+/* New Dashboard Sections */
+.papers-section, .books-section, .skills-section, .research-updates, .pomodoro-section {
     background-color: var(--bg-white);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    margin: 1rem 0;
-    text-align: center;
-}
-
-.equation-note {
-    font-size: 0.875rem;
-    color: var(--text-light);
-    text-align: center;
-    font-style: italic;
-}
-
-/* Motivation Corner */
-.motivation-quote {
-    background-color: var(--light-blue);
-    padding: 2rem;
-    border-radius: 0.5rem;
-    border-left: 4px solid var(--primary-blue);
-    font-size: 1.125rem;
-    font-style: italic;
     margin-bottom: 2rem;
 }
 
-.daily-step {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    max-width: 600px;
-    margin: 0 auto;
+.papers-actions, .skills-actions {
+    margin-bottom: 1rem;
 }
 
-.daily-step input {
+.add-paper-form, .add-skill-form {
+    background-color: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.add-paper-form .form-group, .add-skill-form .form-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.add-paper-form input, .add-skill-form input, .add-skill-form textarea {
     flex: 1;
+    min-width: 200px;
     padding: 0.75rem;
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
     font-size: 1rem;
+}
+
+.papers-list {
+    list-style: none;
+    padding: 0;
+}
+
+.papers-list li {
+    background-color: var(--bg-light);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.paper-title {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.paper-link {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.paper-link:hover {
+    text-decoration: underline;
+}
+
+.books-content, .updates-content {
+    margin-top: 1rem;
+}
+
+.books-content textarea, .updates-content textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    resize: vertical;
+}
+
+.file-note {
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.file-note code {
+    background-color: var(--bg-light);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.skills-list {
+    margin-top: 1rem;
+}
+
+.skill-item {
+    background-color: var(--bg-light);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.skill-item h5 {
+    margin: 0 0 0.5rem 0;
+    color: var(--primary-blue);
+}
+
+.skill-item p {
+    margin: 0;
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+.skill-item .skill-date {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+/* Pomodoro Timer */
+.pomodoro-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.timer-display {
+    position: relative;
+}
+
+.timer-circle {
+    width: 200px;
+    height: 200px;
+    border: 8px solid var(--light-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-white);
+    box-shadow: var(--shadow-lg);
+}
+
+.timer-circle.active {
+    border-color: var(--primary-blue);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+#pomodoroTime {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    font-family: 'Courier New', monospace;
+}
+
+.timer-controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.session-stats {
+    text-align: center;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.session-stats p {
+    margin: 0;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.session-stats span {
+    color: var(--primary-blue);
+    font-weight: 700;
+}
+
+.session-history {
+    margin-top: 2rem;
+}
+
+.session-history h4 {
+    margin-bottom: 1rem;
+    color: var(--primary-blue);
+}
+
+.session-history ul {
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.session-history li {
+    background-color: var(--bg-light);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--border-color);
+    font-size: 0.875rem;
+}
+
+.session-time {
+    color: var(--text-light);
+    font-size: 0.75rem;
 }
 
 /* Forms */
@@ -683,8 +822,26 @@ footer {
         padding: 0 15px;
     }
 
-    .overview-grid {
-        grid-template-columns: 1fr;
+    .add-paper-form .form-group, .add-skill-form .form-group {
+        flex-direction: column;
+    }
+    
+    .add-paper-form input, .add-skill-form input, .add-skill-form textarea {
+        min-width: 100%;
+    }
+    
+    .timer-circle {
+        width: 150px;
+        height: 150px;
+    }
+    
+    #pomodoroTime {
+        font-size: 2rem;
+    }
+    
+    .session-stats {
+        flex-direction: column;
+        gap: 1rem;
     }
 
     .links-grid {
