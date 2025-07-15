@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Research Hub - Papers, books, and first principles notes">
+    <meta name="keywords" content="VOF, Multiphase Flows, Interface Reconstruction, Machine Learning">
+    <meta name="author" content="PhD Student at UMass Dartmouth">
+    <title>Research Hub - PhD Mastery Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="nav-title">PhD Mastery Portfolio</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="research.html" class="nav-link active">Research Hub</a></li>
+                    <li><a href="models.html" class="nav-link">Mental Models Vault</a></li>
+                    <li><a href="progress.html" class="nav-link">Progress Tracker</a></li>
+                    <li><a href="concentration.html" class="nav-link">Concentration Log</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2>Research Hub</h2>
+                <p>Papers, books, and first principles analysis for three-phase interface reconstruction</p>
+            </div>
+        </section>
+
+        <section class="research-actions">
+            <div class="container">
+                <button class="btn btn-primary" onclick="showAddForm()">+ Add New Research Entry</button>
+                <div class="search-box">
+                    <input type="text" id="searchResearch" placeholder="Search research entries..." onkeyup="searchResearch()">
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Research Form -->
+        <section class="add-form" id="addResearchForm" style="display: none;">
+            <div class="container">
+                <div class="form-card">
+                    <h3>Add New Research Entry</h3>
+                    <form id="researchForm">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="link">Link (URL)</label>
+                            <input type="url" id="link">
+                        </div>
+                        <div class="form-group">
+                            <label for="tags">Tags (comma-separated)</label>
+                            <input type="text" id="tags" placeholder="e.g., Three-Phase, ML, VOF">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstPrinciples">First Principles Notes</label>
+                            <textarea id="firstPrinciples" rows="3" placeholder="Break down to fundamental physics..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="mentalModel">Mental Model</label>
+                            <input type="text" id="mentalModel" placeholder="e.g., Interface as Jello layers">
+                        </div>
+                        <div class="form-group">
+                            <label for="confidence">Confidence Rating (1-10)</label>
+                            <input type="number" id="confidence" min="1" max="10" value="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="connections">Connections to My Work</label>
+                            <textarea id="connections" rows="2" placeholder="How does this relate to my research?"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="keyEquations">Key Equations</label>
+                            <textarea id="keyEquations" rows="3" placeholder="e.g., Δp = σκ (Young-Laplace equation)"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Add Entry</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideAddForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Entries -->
+        <section class="research-entries">
+            <div class="container">
+                <h3>Research Library</h3>
+                <div id="researchGrid" class="research-grid">
+                    <!-- Sample entries will be populated here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PhD Mastery Portfolio | Built with Cursor AI</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

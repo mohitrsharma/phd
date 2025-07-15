@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PhD Mastery Portfolio - Mechanical Engineering research in multiphase flows">
+    <meta name="keywords" content="PhD, Mechanical Engineering, VOF, Multiphase Flows, Machine Learning">
+    <meta name="author" content="PhD Student at UMass Dartmouth">
+    <title>PhD Mastery Portfolio - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="nav-title">PhD Mastery Portfolio</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="research.html" class="nav-link">Research Hub</a></li>
+                    <li><a href="models.html" class="nav-link">Mental Models Vault</a></li>
+                    <li><a href="progress.html" class="nav-link">Progress Tracker</a></li>
+                    <li><a href="concentration.html" class="nav-link">Concentration Log</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Welcome to My PhD Journey</h2>
+                    <p class="hero-bio">
+                        PhD in Mechanical Engineering at UMass Dartmouth under Dr. Mehdi Raessi. 
+                        Research: Three-phase interface reconstruction speedup with ML-integrated golden search in multiphase flows using VOF methods.
+                    </p>
+                    <div class="hero-equation">
+                        \[\nabla \cdot \mathbf{u} = 0 \quad \text{(Conservation of Mass)}\]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Links -->
+        <section class="quick-links">
+            <div class="container">
+                <h3>Quick Navigation</h3>
+                <div class="links-grid">
+                    <a href="research.html" class="link-card">
+                        <div class="card-icon">📚</div>
+                        <h4>Research Hub</h4>
+                        <p>Papers, first principles, and research notes</p>
+                    </a>
+                    <a href="models.html" class="link-card">
+                        <div class="card-icon">🧠</div>
+                        <h4>Mental Models Vault</h4>
+                        <p>Cognitive frameworks for research</p>
+                    </a>
+                    <a href="progress.html" class="link-card">
+                        <div class="card-icon">📈</div>
+                        <h4>Progress Tracker</h4>
+                        <p>Milestones and weekly achievements</p>
+                    </a>
+                    <a href="concentration.html" class="link-card">
+                        <div class="card-icon">🎯</div>
+                        <h4>Concentration Log</h4>
+                        <p>Focus sessions and productivity metrics</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Overview -->
+        <section class="daily-overview">
+            <div class="container">
+                <h3>Today's Focus</h3>
+                <div class="overview-grid">
+                    <div class="todo-section">
+                        <h4>Priority Tasks</h4>
+                        <ul class="todo-list">
+                            <li>Read VOF reconstruction paper</li>
+                            <li>Apply Flow Observer mental model</li>
+                            <li>Code ML-golden search optimization</li>
+                            <li>Review three-phase interface theory</li>
+                            <li>Write first principles notes on Navier-Stokes</li>
+                        </ul>
+                    </div>
+                    <div class="research-focus">
+                        <h4>Research Focus</h4>
+                        <p>Interface reconstruction algorithms in multiphase flows</p>
+                        <div class="focus-equation">
+                            \[\frac{\partial \alpha}{\partial t} + \mathbf{u} \cdot \nabla \alpha = 0\]
+                        </div>
+                        <p class="equation-note">Volume fraction transport equation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Motivation Corner -->
+        <section class="motivation-corner">
+            <div class="container">
+                <h3>Motivation Corner</h3>
+                <blockquote class="motivation-quote">
+                    "Break to first principles: Start with conservation laws. Understanding the fundamental physics drives breakthrough solutions."
+                </blockquote>
+                <div class="daily-step">
+                    <label for="todayStep">Today's Step:</label>
+                    <input type="text" id="todayStep" placeholder="What's your focus for today?" maxlength="200">
+                    <button onclick="saveTodayStep()">Save Step</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PhD Mastery Portfolio | Built with Cursor AI</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

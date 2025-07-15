@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Progress Tracker - Milestones, quick wins, and reflection">
+    <meta name="keywords" content="Progress, Milestones, PhD, Concentration, Reflection">
+    <meta name="author" content="PhD Student at UMass Dartmouth">
+    <title>Progress Tracker - PhD Mastery Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="nav-title">PhD Mastery Portfolio</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="research.html" class="nav-link">Research Hub</a></li>
+                    <li><a href="models.html" class="nav-link">Mental Models Vault</a></li>
+                    <li><a href="progress.html" class="nav-link active">Progress Tracker</a></li>
+                    <li><a href="concentration.html" class="nav-link">Concentration Log</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2>Progress Tracker</h2>
+                <p>Track milestones, quick wins, and concentration trends in your PhD journey</p>
+            </div>
+        </section>
+
+        <!-- Progress Actions -->
+        <section class="progress-actions">
+            <div class="container">
+                <button class="btn btn-primary" onclick="showAddProgressForm()">+ Add Weekly Progress</button>
+                <button class="btn btn-secondary" onclick="exportProgress()">Export Progress</button>
+            </div>
+        </section>
+
+        <!-- Add Progress Form -->
+        <section class="add-form" id="addProgressForm" style="display: none;">
+            <div class="container">
+                <div class="form-card">
+                    <h3>Add Weekly Progress</h3>
+                    <form id="progressForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="progressWeek">Week/Date</label>
+                                <input type="date" id="progressWeek" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="concentrationScore">Concentration Score (1-10)</label>
+                                <input type="number" id="concentrationScore" min="1" max="10" value="7">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="quickWins">Quick Wins</label>
+                            <textarea id="quickWins" rows="3" placeholder="What small victories did you achieve this week?"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="endorphinsLog">Endorphins Log</label>
+                            <textarea id="endorphinsLog" rows="2" placeholder="Physical activities, exercise, mood boosters..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="milestones">Milestones</label>
+                            <textarea id="milestones" rows="3" placeholder="Major accomplishments, breakthroughs, completed goals..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Add Progress</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideAddProgressForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Overview -->
+        <section class="progress-overview">
+            <div class="container">
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <h3>Average Concentration</h3>
+                        <div class="metric-value" id="avgConcentration">8.2</div>
+                        <div class="metric-label">out of 10</div>
+                    </div>
+                    <div class="overview-card">
+                        <h3>Weekly Entries</h3>
+                        <div class="metric-value" id="weeklyEntries">12</div>
+                        <div class="metric-label">weeks tracked</div>
+                    </div>
+                    <div class="overview-card">
+                        <h3>Total Quick Wins</h3>
+                        <div class="metric-value" id="totalQuickWins">47</div>
+                        <div class="metric-label">achievements</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concentration Chart -->
+        <section class="concentration-chart">
+            <div class="container">
+                <h3>Concentration Trends</h3>
+                <div class="chart-container">
+                    <canvas id="concentrationChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Table -->
+        <section class="progress-table">
+            <div class="container">
+                <h3>Progress History</h3>
+                <div class="table-container">
+                    <table id="progressTable">
+                        <thead>
+                            <tr>
+                                <th>Week/Date</th>
+                                <th>Quick Wins</th>
+                                <th>Concentration Score</th>
+                                <th>Endorphins Log</th>
+                                <th>Milestones</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="progressTableBody">
+                            <!-- Progress entries will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reflection Section -->
+        <section class="reflection-section">
+            <div class="container">
+                <h3>Weekly Reflection</h3>
+                <div class="reflection-card">
+                    <textarea id="reflectionNotes" rows="6" placeholder="Reflect on your progress, challenges, insights, and next steps..."></textarea>
+                    <button class="btn btn-primary" onclick="saveReflection()">Save Reflection</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PhD Mastery Portfolio | Built with Cursor AI</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

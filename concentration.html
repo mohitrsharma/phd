@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Concentration Log - Focus sessions and productivity tracking">
+    <meta name="keywords" content="Concentration, Focus, Productivity, Pomodoro, PhD">
+    <meta name="author" content="PhD Student at UMass Dartmouth">
+    <title>Concentration Log - PhD Mastery Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="nav-title">PhD Mastery Portfolio</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="research.html" class="nav-link">Research Hub</a></li>
+                    <li><a href="models.html" class="nav-link">Mental Models Vault</a></li>
+                    <li><a href="progress.html" class="nav-link">Progress Tracker</a></li>
+                    <li><a href="concentration.html" class="nav-link active">Concentration Log</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2>Concentration Log</h2>
+                <p>Track focus sessions, productivity scores, and optimize your concentration habits</p>
+            </div>
+        </section>
+
+        <!-- Concentration Actions -->
+        <section class="concentration-actions">
+            <div class="container">
+                <button class="btn btn-primary" onclick="showAddSessionForm()">+ Add Focus Session</button>
+                <button class="btn btn-secondary" onclick="startTimer()">Start Pomodoro Timer</button>
+                <div class="timer-display" id="timerDisplay" style="display: none;">
+                    <span id="timerText">25:00</span>
+                    <button class="btn btn-small" onclick="stopTimer()">Stop</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Session Form -->
+        <section class="add-form" id="addSessionForm" style="display: none;">
+            <div class="container">
+                <div class="form-card">
+                    <h3>Add Focus Session</h3>
+                    <form id="sessionForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sessionDate">Date</label>
+                                <input type="date" id="sessionDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="focusDuration">Focus Duration</label>
+                                <input type="text" id="focusDuration" placeholder="e.g., 25 min" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="focusScore">Focus Score (1-10)</label>
+                                <input type="number" id="focusScore" min="1" max="10" value="7">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sessionNotes">Notes</label>
+                            <textarea id="sessionNotes" rows="3" placeholder="What did you work on? Any observations about focus quality?"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Add Session</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideAddSessionForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concentration Stats -->
+        <section class="concentration-stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Today's Focus</h3>
+                        <div class="stat-value" id="todayFocus">2.5 hrs</div>
+                        <div class="stat-label">total time</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Average Score</h3>
+                        <div class="stat-value" id="avgScore">7.8</div>
+                        <div class="stat-label">out of 10</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Best Session</h3>
+                        <div class="stat-value" id="bestSession">90 min</div>
+                        <div class="stat-label">longest focus</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>This Week</h3>
+                        <div class="stat-value" id="weeklyTotal">18.5 hrs</div>
+                        <div class="stat-label">total focus</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concentration Table -->
+        <section class="concentration-table">
+            <div class="container">
+                <h3>Focus Session History</h3>
+                <div class="table-controls">
+                    <input type="text" id="searchSessions" placeholder="Search sessions..." onkeyup="searchSessions()">
+                    <select id="filterScore" onchange="filterSessions()">
+                        <option value="">All Scores</option>
+                        <option value="9-10">Excellent (9-10)</option>
+                        <option value="7-8">Good (7-8)</option>
+                        <option value="5-6">Average (5-6)</option>
+                        <option value="1-4">Poor (1-4)</option>
+                    </select>
+                </div>
+                <div class="table-container">
+                    <table id="concentrationTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Duration</th>
+                                <th>Score</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="concentrationTableBody">
+                            <!-- Concentration entries will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Productivity Tips -->
+        <section class="productivity-tips">
+            <div class="container">
+                <h3>Concentration Tips & Techniques</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>🍅 Pomodoro Technique</h4>
+                        <p>Test 25-minute focused work sessions followed by 5-minute breaks. After 4 sessions, take a longer 15-30 minute break.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>💪 Endorphin Boost</h4>
+                        <p>Exercise for 10-20 minutes before intensive study sessions. Physical activity increases focus and cognitive performance.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🧠 Deep Work Blocks</h4>
+                        <p>Schedule 90-120 minute blocks for complex research tasks. Match your natural energy peaks with demanding work.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>📱 Digital Minimalism</h4>
+                        <p>Use website blockers, put phone in another room, and create a distraction-free environment for maximum focus.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🎯 Single-tasking</h4>
+                        <p>Focus on one research task at a time. Multitasking reduces concentration quality and increases mental fatigue.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>⏰ Time Blocking</h4>
+                        <p>Assign specific time slots for different activities: reading, coding, writing, and analysis. Stick to the schedule.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Start Guide -->
+        <section class="quick-start">
+            <div class="container">
+                <h3>Quick Start Guide</h3>
+                <div class="guide-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Set Your Environment</h4>
+                            <p>Clear desk, good lighting, water nearby, phone away</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Choose Your Session</h4>
+                            <p>Start with 25-minute Pomodoro or 90-minute deep work block</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Track & Reflect</h4>
+                            <p>Log your session with focus score and notes for improvement</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PhD Mastery Portfolio | Built with Cursor AI</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

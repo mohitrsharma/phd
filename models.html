@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mental Models Vault - Cognitive frameworks for research">
+    <meta name="keywords" content="Mental Models, Research, Cognitive Frameworks, PhD">
+    <meta name="author" content="PhD Student at UMass Dartmouth">
+    <title>Mental Models Vault - PhD Mastery Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="nav-title">PhD Mastery Portfolio</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="research.html" class="nav-link">Research Hub</a></li>
+                    <li><a href="models.html" class="nav-link active">Mental Models Vault</a></li>
+                    <li><a href="progress.html" class="nav-link">Progress Tracker</a></li>
+                    <li><a href="concentration.html" class="nav-link">Concentration Log</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2>Mental Models Vault</h2>
+                <p>Cognitive frameworks for observation, analysis, and breakthrough thinking in research</p>
+            </div>
+        </section>
+
+        <section class="models-actions">
+            <div class="container">
+                <button class="btn btn-primary" onclick="showAddModelForm()">+ Add New Mental Model</button>
+                <div class="search-box">
+                    <input type="text" id="searchModels" placeholder="Search mental models..." onkeyup="searchModels()">
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Mental Model Form -->
+        <section class="add-form" id="addModelForm" style="display: none;">
+            <div class="container">
+                <div class="form-card">
+                    <h3>Add New Mental Model</h3>
+                    <form id="modelForm">
+                        <div class="form-group">
+                            <label for="modelName">Mental Model Name</label>
+                            <input type="text" id="modelName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelDescription">Description</label>
+                            <textarea id="modelDescription" rows="3" placeholder="What is this mental model about?"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelLayers">Layers/Components (one per line)</label>
+                            <textarea id="modelLayers" rows="4" placeholder="Layer 1: Description&#10;Layer 2: Description&#10;..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="researchApplication">Application to Research</label>
+                            <textarea id="researchApplication" rows="3" placeholder="How does this apply to your research?"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelExample">Example/Use Case</label>
+                            <textarea id="modelExample" rows="2" placeholder="Specific example of using this model"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Add Model</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideAddModelForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mental Models Gallery -->
+        <section class="models-gallery">
+            <div class="container">
+                <h3>Mental Models Collection</h3>
+                <div id="modelsAccordion" class="accordion">
+                    <!-- Mental models will be populated here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PhD Mastery Portfolio | Built with Cursor AI</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
