@@ -3,66 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohit Sharma's PhD Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Mohit Sharma - PhD Portfolio | Research, Teaching, and Innovation">
+    <title>Mohit Sharma - PhD Portfolio | Exploration of Knowledge</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&family=Merriweather:ital@1&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- MathJax -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#about">About Me / Home</a></li>
-            <li><a href="#research-insights">Research Insights</a></li>
-            <li><a href="#courses">Courses</a></li>
-            <li><a href="#books">Books</a></li>
-            <li><a href="#two-min-reads">2 Min Reads</a></li>
-        </ul>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">MS</span>
+                <span class="logo-subtitle">PhD Portfolio</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span>About Me</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#research" class="nav-link">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Research Insights</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#courses" class="nav-link">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Courses</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#books" class="nav-link">
+                        <i class="fas fa-book"></i>
+                        <span>Books</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#reads" class="nav-link">
+                        <i class="fas fa-clock"></i>
+                        <span>2 Min Reads</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </nav>
 
-    <section id="about">
-        <h1>About Me</h1>
-        <div id="bio" contenteditable="true" class="editable" data-placeholder="Your Name, PhD Candidate in [Field]. Brief overview of research interests, teaching experience, and goals."></div>
-        <blockquote>“Nobody ever figures out what life is all about, and it doesn't matter. Explore the world. Nearly everything is really interesting if you go into it deeply enough.” — Richard Feynman</blockquote>
-        <p>Email: <a href="mailto:ms.rks2001@gmail.com">ms.rks2001@gmail.com</a></p>
+    <!-- Edit Mode Toggle -->
+    <button class="edit-mode-toggle" id="editModeToggle" aria-label="Toggle Edit Mode">
+        <i class="fas fa-edit"></i>
+    </button>
 
-        <h2>Today's Learning</h2>
-        <div id="todays-learning" contenteditable="true" class="editable" data-placeholder="What I learned today..."></div>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <div class="quote-container fade-in">
+                    <blockquote class="feynman-quote">
+                        <p>"Nobody ever figures out what life is all about, and it doesn't matter. Explore the world. Nearly everything is really interesting if you go into it deeply enough."</p>
+                        <cite>— Richard Feynman</cite>
+                    </blockquote>
+                </div>
+                
+                <div class="bio-container fade-in-delayed">
+                    <h1 class="hero-title">Welcome to My Academic Journey</h1>
+                    <div class="bio-content editable" contenteditable="false" data-placeholder="Your Name, PhD Candidate in [Field]. Brief overview of research interests, teaching experience, and goals."></div>
+                    <a href="mailto:ms.rks2001@gmail.com" class="email-button">
+                        <i class="fas fa-envelope"></i>
+                        <span>Get in Touch</span>
+                    </a>
+                </div>
 
-        <h2>Today's Research Update</h2>
-        <div id="todays-research-update" contenteditable="true" class="editable" data-placeholder="Latest research progress..."></div>
+                <div class="daily-pods">
+                    <div class="pod learning-pod floating" data-delay="0">
+                        <div class="pod-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Today's Learning</h3>
+                        <div class="pod-content editable" contenteditable="false" data-placeholder="What fascinating concept did you explore today?"></div>
+                        <span class="save-indicator"><i class="fas fa-check"></i> Saved</span>
+                    </div>
 
-        <h2>Today Working On</h2>
-        <div id="today-working-on" contenteditable="true" class="editable" data-placeholder="Current tasks and focus..."></div>
-    </section>
+                    <div class="pod research-pod floating" data-delay="200">
+                        <div class="pod-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3>Research Update</h3>
+                        <div class="pod-content editable" contenteditable="false" data-placeholder="Latest breakthrough or progress in your research..."></div>
+                        <span class="save-indicator"><i class="fas fa-check"></i> Saved</span>
+                    </div>
 
-    <section id="research-insights">
-        <h1>Research Insights</h1>
-        <div id="research-insights-content" contenteditable="true" class="editable" data-placeholder="Add your research insights, notes, or updates here. Use LaTeX for equations like \( E = mc^2 \ )."></div>
-    </section>
+                    <div class="pod working-pod floating" data-delay="400">
+                        <div class="pod-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3>Currently Working On</h3>
+                        <div class="pod-content editable" contenteditable="false" data-placeholder="What's capturing your focus right now?"></div>
+                        <span class="save-indicator"><i class="fas fa-check"></i> Saved</span>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
 
-    <section id="courses">
-        <h1>Courses and Teaching Materials</h1>
-        <p>This section showcases my designed course materials and notes for various subjects, demonstrating my teaching methodology and content creation skills.</p>
-        <details>
-            <summary>Subject 1 (Edit to add your subject)</summary>
-            <div contenteditable="true" class="editable" data-placeholder="Notes and summaries for this subject. Add links like &lt;a href='/assets/courses/notes.pdf'&gt;Download Notes&lt;/a&gt;."></div>
-        </details>
-        <details>
-            <summary>Subject 2 (Edit to add more)</summary>
-            <div contenteditable="true" class="editable" data-placeholder="Notes and summaries..."></div>
-        </details>
-    </section>
+        <!-- Research Insights Section -->
+        <section id="research" class="research-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Research Insights</h2>
+                    <p class="section-subtitle">Exploring the frontiers of knowledge</p>
+                </div>
+                
+                <div class="insights-grid" id="insightsGrid">
+                    <button class="add-insight-btn" id="addInsightBtn">
+                        <i class="fas fa-plus"></i>
+                        <span>Add New Insight</span>
+                    </button>
+                </div>
+            </div>
+        </section>
 
-    <section id="books">
-        <h1>Books and Reading Notes</h1>
-        <div id="books-content" contenteditable="true" class="editable" data-placeholder="Book Title: Summary here... Add more as needed."></div>
-    </section>
+        <!-- Courses Section -->
+        <section id="courses" class="courses-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Teaching & Course Materials</h2>
+                    <p class="section-subtitle">Empowering minds through education</p>
+                </div>
+                
+                <div class="courses-accordion" id="coursesAccordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span class="editable-title" contenteditable="false" data-placeholder="Course Title">Course 1</span>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="editable" contenteditable="false" data-placeholder="Course description, materials, and links. Add links like <a href='/assets/courses/notes.pdf'>Download Notes</a>"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="add-course-btn" id="addCourseBtn">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add New Course</span>
+                    </button>
+                </div>
+            </div>
+        </section>
 
-    <section id="two-min-reads">
-        <h1>2 Min Reads</h1>
-        <div id="two-min-reads-content" contenteditable="true" class="editable" data-placeholder="Short post title: Brief content here (100-200 words)... Add more entries."></div>
-    </section>
+        <!-- Books Section -->
+        <section id="books" class="books-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Books & Reading Notes</h2>
+                    <p class="section-subtitle">A journey through literature and ideas</p>
+                </div>
+                
+                <div class="books-masonry" id="booksMasonry">
+                    <div class="add-book-container">
+                        <button class="add-book-btn" id="addBookBtn">
+                            <i class="fas fa-plus"></i>
+                            <span>Add Book</span>
+                        </button>
+                    </div>
+                    <div class="books-content editable" contenteditable="false" data-placeholder="Enter books in format - Book Title: Summary/Notes. Each book will become a card."></div>
+                </div>
+            </div>
+        </section>
 
+        <!-- 2 Min Reads Section -->
+        <section id="reads" class="reads-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">2 Minute Reads</h2>
+                    <p class="section-subtitle">Quick insights and reflections</p>
+                </div>
+                
+                <div class="reads-carousel">
+                    <div class="carousel-container" id="carouselContainer">
+                        <div class="carousel-slides" id="carouselSlides">
+                            <!-- Slides will be dynamically added -->
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-controls">
+                        <button class="carousel-btn prev" id="prevBtn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn next" id="nextBtn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="carousel-progress">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    
+                    <button class="add-read-btn" id="addReadBtn">
+                        <i class="fas fa-pen"></i>
+                        <span>Add New Read</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Mohit Sharma. Exploring the depths of knowledge.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
 </html> 
