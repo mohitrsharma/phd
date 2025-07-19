@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Courses and Teaching Materials - PhD Portfolio">
+    <title>Courses - PhD Mastery Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="nav-title">PhD Mastery Portfolio</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="research.html" class="nav-link">Research Hub</a></li>
+                    <li><a href="models.html" class="nav-link">Mental Models Vault</a></li>
+                    <li><a href="progress.html" class="nav-link">Progress Tracker</a></li>
+                    <li><a href="concentration.html" class="nav-link">Concentration Log</a></li>
+                    <li><a href="courses.html" class="nav-link active">Courses</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2>Courses and Teaching Materials</h2>
+                <p>This section showcases my designed course materials and notes for various subjects, demonstrating my teaching methodology and content creation skills.</p>
+            </div>
+        </section>
+
+        <!-- Add Course Form -->
+        <section class="add-form" id="addCourseForm">
+            <div class="container">
+                <div class="form-card">
+                    <h3>Add New Subject</h3>
+                    <form id="courseForm">
+                        <div class="form-group">
+                            <label for="subjectName">Subject Name</label>
+                            <input type="text" id="subjectName" required placeholder="e.g., Fluid Mechanics 101">
+                        </div>
+                        <div class="form-group">
+                            <label for="subjectNotes">Initial Notes / Summary</label>
+                            <textarea id="subjectNotes" rows="3" placeholder="Brief overview or initial notes..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Add Subject</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Accordion -->
+        <section class="models-gallery">
+            <div class="container">
+                <h3>Subjects</h3>
+                <div id="coursesAccordion" class="accordion">
+                    <!-- Subjects will populate here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html> 

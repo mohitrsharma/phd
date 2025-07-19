@@ -3,183 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PhD Mastery Portfolio - Mechanical Engineering research in multiphase flows">
-    <meta name="keywords" content="PhD, Mechanical Engineering, VOF, Multiphase Flows, Machine Learning">
-    <meta name="author" content="PhD Student at UMass Dartmouth">
-    <title>PhD Mastery Portfolio - Home</title>
+    <title>Mohit Sharma's PhD Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="nav-container">
-                <h1 class="nav-title">PhD Mastery Portfolio</h1>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link active">Home</a></li>
-                    <li><a href="research.html" class="nav-link">Research Hub</a></li>
-                    <li><a href="models.html" class="nav-link">Mental Models Vault</a></li>
-                    <li><a href="progress.html" class="nav-link">Progress Tracker</a></li>
-                    <li><a href="concentration.html" class="nav-link">Concentration Log</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <nav>
+        <ul>
+            <li><a href="#about">About Me / Home</a></li>
+            <li><a href="#research-insights">Research Insights</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#books">Books</a></li>
+            <li><a href="#two-min-reads">2 Min Reads</a></li>
+        </ul>
+    </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h2>Welcome to My PhD Journey</h2>
-                    <p class="hero-bio">
-                        PhD in Mechanical Engineering at UMass Dartmouth under Dr. Mehdi Raessi. 
-                        Research: Three-phase interface reconstruction speedup with ML-integrated golden search in multiphase flows using VOF methods.
-                    </p>
-                    <div class="hero-equation">
-                        \[\nabla \cdot \mathbf{u} = 0 \quad \text{(Conservation of Mass)}\]
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section id="about">
+        <h1>About Me</h1>
+        <div id="bio" contenteditable="true" class="editable" data-placeholder="Your Name, PhD Candidate in [Field]. Brief overview of research interests, teaching experience, and goals."></div>
+        <blockquote>“Nobody ever figures out what life is all about, and it doesn't matter. Explore the world. Nearly everything is really interesting if you go into it deeply enough.” — Richard Feynman</blockquote>
+        <p>Email: <a href="mailto:ms.rks2001@gmail.com">ms.rks2001@gmail.com</a></p>
 
-        <!-- Quick Links -->
-        <section class="quick-links">
-            <div class="container">
-                <h3>Quick Navigation</h3>
-                <div class="links-grid">
-                    <a href="research.html" class="link-card">
-                        <div class="card-icon">📚</div>
-                        <h4>Research Hub</h4>
-                        <p>Papers, first principles, and research notes</p>
-                    </a>
-                    <a href="models.html" class="link-card">
-                        <div class="card-icon">🧠</div>
-                        <h4>Mental Models Vault</h4>
-                        <p>Cognitive frameworks for research</p>
-                    </a>
-                    <a href="progress.html" class="link-card">
-                        <div class="card-icon">📈</div>
-                        <h4>Progress Tracker</h4>
-                        <p>Milestones and weekly achievements</p>
-                    </a>
-                    <a href="concentration.html" class="link-card">
-                        <div class="card-icon">🎯</div>
-                        <h4>Concentration Log</h4>
-                        <p>Focus sessions and productivity metrics</p>
-                    </a>
-                </div>
-            </div>
-        </section>
+        <h2>Today's Learning</h2>
+        <div id="todays-learning" contenteditable="true" class="editable" data-placeholder="What I learned today..."></div>
 
-        <!-- Papers to be Read -->
-        <section class="papers-section">
-            <div class="container">
-                <h3>Papers to be Read</h3>
-                <div class="papers-actions">
-                    <button class="btn btn-primary" onclick="showAddPaperForm()">+ Add Paper</button>
-                </div>
-                <div class="add-paper-form" id="addPaperForm" style="display: none;">
-                    <div class="form-group">
-                        <input type="text" id="paperTitle" placeholder="Paper Title" maxlength="200">
-                        <input type="url" id="paperZoteroLink" placeholder="Zotero Link (optional)">
-                        <button onclick="addPaper()">Add Paper</button>
-                        <button onclick="hideAddPaperForm()">Cancel</button>
-                    </div>
-                </div>
-                <ul class="papers-list" id="papersList">
-                    <!-- Papers will be populated here -->
-                </ul>
-            </div>
-        </section>
+        <h2>Today's Research Update</h2>
+        <div id="todays-research-update" contenteditable="true" class="editable" data-placeholder="Latest research progress..."></div>
 
-        <!-- Books Summary -->
-        <section class="books-section">
-            <div class="container">
-                <h3>Books Summary</h3>
-                <div class="books-content">
-                    <textarea id="booksSummary" placeholder="Write summaries and notes about books you're reading..." rows="6"></textarea>
-                    <button class="btn btn-primary" onclick="saveBooksSummary()">Save Summary</button>
-                </div>
-            </div>
-        </section>
+        <h2>Today Working On</h2>
+        <div id="today-working-on" contenteditable="true" class="editable" data-placeholder="Current tasks and focus..."></div>
+    </section>
 
-        <!-- Daily Skill Improvements and Learning -->
-        <section class="skills-section">
-            <div class="container">
-                <h3>Daily Skill Improvements and Learning</h3>
-                <div class="skills-actions">
-                    <button class="btn btn-primary" onclick="showAddSkillForm()">+ Add Learning</button>
-                </div>
-                <div class="add-skill-form" id="addSkillForm" style="display: none;">
-                    <div class="form-group">
-                        <input type="text" id="skillTitle" placeholder="Skill/Learning Topic" maxlength="200">
-                        <textarea id="skillNotes" placeholder="Notes on improvement/learning..." rows="3"></textarea>
-                        <button onclick="addSkill()">Add Entry</button>
-                        <button onclick="hideAddSkillForm()">Cancel</button>
-                    </div>
-                </div>
-                <div class="skills-list" id="skillsList">
-                    <!-- Skills will be populated here -->
-                </div>
-            </div>
-        </section>
+    <section id="research-insights">
+        <h1>Research Insights</h1>
+        <div id="research-insights-content" contenteditable="true" class="editable" data-placeholder="Add your research insights, notes, or updates here. Use LaTeX for equations like \( E = mc^2 \ )."></div>
+    </section>
 
-        <!-- Research Updates -->
-        <section class="research-updates">
-            <div class="container">
-                <h3>Research Updates</h3>
-                <div class="updates-content">
-                    <textarea id="researchUpdates" placeholder="Write research updates, notes, and progress..." rows="6"></textarea>
-                    <div class="file-note">
-                        <small>To link files: Upload to /assets/updates/ folder and reference as: <code>./assets/updates/filename.ppt</code></small>
-                    </div>
-                    <button class="btn btn-primary" onclick="saveResearchUpdates()">Save Updates</button>
-                </div>
-            </div>
-        </section>
+    <section id="courses">
+        <h1>Courses and Teaching Materials</h1>
+        <p>This section showcases my designed course materials and notes for various subjects, demonstrating my teaching methodology and content creation skills.</p>
+        <details>
+            <summary>Subject 1 (Edit to add your subject)</summary>
+            <div contenteditable="true" class="editable" data-placeholder="Notes and summaries for this subject. Add links like &lt;a href='/assets/courses/notes.pdf'&gt;Download Notes&lt;/a&gt;."></div>
+        </details>
+        <details>
+            <summary>Subject 2 (Edit to add more)</summary>
+            <div contenteditable="true" class="editable" data-placeholder="Notes and summaries..."></div>
+        </details>
+    </section>
 
-        <!-- Pomodoro Tracker -->
-        <section class="pomodoro-section">
-            <div class="container">
-                <h3>Pomodoro Tracker</h3>
-                <div class="pomodoro-timer">
-                    <div class="timer-display">
-                        <div class="timer-circle">
-                            <span id="pomodoroTime">25:00</span>
-                        </div>
-                    </div>
-                    <div class="timer-controls">
-                        <button class="btn btn-primary" id="startBtn" onclick="startPomodoro()">Start</button>
-                        <button class="btn btn-secondary" id="pauseBtn" onclick="pausePomodoro()" disabled>Pause</button>
-                        <button class="btn btn-secondary" onclick="resetPomodoro()">Reset</button>
-                    </div>
-                    <div class="session-stats">
-                        <p>Sessions Today: <span id="sessionsToday">0</span></p>
-                        <p>Total Sessions: <span id="totalSessions">0</span></p>
-                    </div>
-                </div>
-                <div class="session-history">
-                    <h4>Recent Sessions</h4>
-                    <ul id="sessionHistory">
-                        <!-- Session history will be populated here -->
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
+    <section id="books">
+        <h1>Books and Reading Notes</h1>
+        <div id="books-content" contenteditable="true" class="editable" data-placeholder="Book Title: Summary here... Add more as needed."></div>
+    </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 PhD Mastery Portfolio | Built with Cursor AI</p>
-        </div>
-    </footer>
+    <section id="two-min-reads">
+        <h1>2 Min Reads</h1>
+        <div id="two-min-reads-content" contenteditable="true" class="editable" data-placeholder="Short post title: Brief content here (100-200 words)... Add more entries."></div>
+    </section>
 
     <script src="script.js"></script>
 </body>
