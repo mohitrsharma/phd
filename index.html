@@ -22,21 +22,19 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="animated-bg">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
+    <!-- Background -->
+    <div class="bg-overlay"></div>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <span class="logo-text">MS</span>
-                <span class="logo-subtitle">PhD Portfolio</span>
+                <span class="logo-text">Mohit Sharma</span>
+                <span class="logo-subtitle">PhD Candidate</span>
+            </div>
+            <div class="nav-motto">
+                <span class="motto-text">Vedha Tadhate Venyam</span>
+                <span class="motto-sub">Vidya Dadati Vinayam</span>
             </div>
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item">
@@ -97,40 +95,20 @@
                 </div>
                 
                 <div class="bio-container fade-in-delayed">
-                    <h1 class="hero-title">Welcome to My Academic Journey</h1>
-                    <div class="bio-content editable" contenteditable="false" data-placeholder="Your Name, PhD Candidate in [Field]. Brief overview of research interests, teaching experience, and goals."></div>
-                    <a href="mailto:ms.rks2001@gmail.com" class="email-button">
-                        <i class="fas fa-envelope"></i>
-                        <span>Get in Touch</span>
-                    </a>
-                </div>
-
-                <div class="daily-pods">
-                    <div class="pod learning-pod floating" data-delay="0">
-                        <div class="pod-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <h3>Today's Learning</h3>
-                        <div class="pod-content editable" contenteditable="false" data-placeholder="What fascinating concept did you explore today?"></div>
-                        <span class="save-indicator"><i class="fas fa-check"></i> Saved</span>
+                    <h1 class="hero-title">Mohit Sharma</h1>
+                    <h2 class="hero-subtitle">PhD Candidate in Mechanical Engineering</h2>
+                    <p class="hero-advisor">Advisor: Dr. Raessi | UMass Dartmouth</p>
+                    
+                    <div class="bio-content">
+                        <p>Specializing in <strong>Multiphase Flows</strong>, <strong>Overset Meshes (Chimera)</strong>, <strong>Machine Learning</strong>, and <strong>OpenFOAM</strong>.</p>
+                        <p>My research focuses on developing advanced computational methods for complex fluid dynamics problems.</p>
                     </div>
 
-                    <div class="pod research-pod floating" data-delay="200">
-                        <div class="pod-icon">
-                            <i class="fas fa-flask"></i>
-                        </div>
-                        <h3>Research Update</h3>
-                        <div class="pod-content editable" contenteditable="false" data-placeholder="Latest breakthrough or progress in your research..."></div>
-                        <span class="save-indicator"><i class="fas fa-check"></i> Saved</span>
-                    </div>
-
-                    <div class="pod working-pod floating" data-delay="400">
-                        <div class="pod-icon">
-                            <i class="fas fa-tasks"></i>
-                        </div>
-                        <h3>Currently Working On</h3>
-                        <div class="pod-content editable" contenteditable="false" data-placeholder="What's capturing your focus right now?"></div>
-                        <span class="save-indicator"><i class="fas fa-check"></i> Saved</span>
+                    <div class="hero-actions">
+                        <a href="#research" class="primary-btn">View Research</a>
+                        <a href="mailto:ms.rks2001@gmail.com" class="secondary-btn">
+                            <i class="fas fa-envelope"></i> Contact
+                        </a>
                     </div>
                 </div>
             </div>
@@ -148,10 +126,22 @@
                 </div>
                 
                 <div class="insights-grid" id="insightsGrid">
-                    <button class="add-insight-btn" id="addInsightBtn">
-                        <i class="fas fa-plus"></i>
-                        <span>Add New Insight</span>
-                    </button>
+                    <div class="insight-card">
+                        <h3>Multiphase Flows</h3>
+                        <p>Investigation of complex interface dynamics and phase interactions in fluid systems.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h3>Overset Meshes</h3>
+                        <p>Implementation of Chimera grid methods for moving body problems and complex geometries.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h3>Machine Learning</h3>
+                        <p>Applying ML algorithms to accelerate CFD simulations and improve turbulence modeling.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h3>OpenFOAM</h3>
+                        <p>Development of custom solvers and libraries within the OpenFOAM framework.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -192,14 +182,28 @@
                     <p class="section-subtitle">A journey through literature and ideas</p>
                 </div>
                 
-                <div class="books-masonry" id="booksMasonry">
-                    <div class="add-book-container">
-                        <button class="add-book-btn" id="addBookBtn">
-                            <i class="fas fa-plus"></i>
-                            <span>Add Book</span>
-                        </button>
+                <div class="books-grid" id="booksGrid">
+                    <!-- Books will be populated here -->
+                    <div class="book-card">
+                        <div class="book-cover-placeholder">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="book-info">
+                            <h4>Fluid Mechanics</h4>
+                            <p class="book-author">Kundu & Cohen</p>
+                            <p class="book-status">Reading</p>
+                        </div>
                     </div>
-                    <div class="books-content editable" contenteditable="false" data-placeholder="Enter books in format - Book Title: Summary/Notes. Each book will become a card."></div>
+                    <div class="book-card">
+                        <div class="book-cover-placeholder">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="book-info">
+                            <h4>Turbulence Modeling</h4>
+                            <p class="book-author">Wilcox</p>
+                            <p class="book-status">To Read</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
